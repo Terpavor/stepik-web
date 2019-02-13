@@ -9,6 +9,7 @@ def app(environ, start_response):
         .split('?')[-1]             # от последнего '?'
         .split('#')[0]              # до первого #
         .replace('&', '\n')         #
+        .encode('utf-8')
     )
     
     start_response(status, headers)
