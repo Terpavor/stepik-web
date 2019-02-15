@@ -1,10 +1,10 @@
-cd `dirname $0`
+sudo ln                              `# make links between files         `\
+	--symbolic                       `# symbolic link, not hard link     `\
+	--force                          `# delete existing destination file `\
+	/home/box/web/etc/nginx.conf     `# source file                      `\
+	/etc/nginx/sites-enabled/default `# destination symlink              `
 
-sudo rm /etc/nginx/sites-enabled/default
-sudo ln -sf /home/box/web/etc/nginx.conf \
-            /etc/nginx/sites-enabled/default
-sudo /etc/init.d/nginx restart
-
+service nginx restart
 
 mkdir -p /etc/gunicorn.d
 sudo ln -sf /home/box/web/etc/gunicorn.conf \
@@ -15,3 +15,5 @@ gunicorn                    \
     hello:app
 
 sudo /etc/init.d/gunicorn restart
+
+exit 0
