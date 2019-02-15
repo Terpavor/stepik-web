@@ -4,7 +4,10 @@ sudo ln                              `# make links between files         `\
     /home/box/web/etc/nginx.conf     `# source file                      `\
     /etc/nginx/sites-enabled/default `# destination symlink              `
 
-service nginx restart
+#service nginx restart
+/etc/init.d/nginx restart
+
+exit 0
 
 mkdir -p /etc/gunicorn.d
 sudo ln -sf /home/box/web/etc/gunicorn.conf \
