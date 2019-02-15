@@ -1,8 +1,8 @@
 sudo ln                              `# make links between files         `\
-	--symbolic                       `# symbolic link, not hard link     `\
-	--force                          `# delete existing destination file `\
-	/home/box/web/etc/nginx.conf     `# source file                      `\
-	/etc/nginx/sites-enabled/default `# destination symlink              `
+    --symbolic                       `# symbolic link, not hard link     `\
+    --force                          `# delete existing destination file `\
+    /home/box/web/etc/nginx.conf     `# source file                      `\
+    /etc/nginx/sites-enabled/default `# destination symlink              `
 
 service nginx restart
 
