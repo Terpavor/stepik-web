@@ -17,7 +17,7 @@ from django.urls import include, path, re_path
 import qa.urls
 
 urlpatterns = [
-	re_path('.*', include(qa.urls))
+	re_path('', include(qa.urls))
 ]
 
 '''
