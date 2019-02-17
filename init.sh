@@ -5,8 +5,7 @@ sudo ln                              `# make links between files         `\
     /home/box/web/etc/nginx.conf     `# source file                      `\
     /etc/nginx/sites-enabled/default `# destination file (symlink)       `
 
-sudo nginx -s reload
-# ^ запускает ли это nginx?..
+sudo service nginx restart
 
 
 # --- 2. gunicorn ---
@@ -18,7 +17,7 @@ sudo gunicorn               `#          				`\
 
 
 
-read -p "Press enter to continue..."
+# read -p "Press enter to continue..."
 
 
 
@@ -37,6 +36,10 @@ exit 0
 #    --bind 0.0.0.0:8080     `# socket to bind         	`\
 #    hello:app				 `# module:function         	`
 
+
+# sudo nginx -s reload
+# sudo nginx --signal reload
+# ^ это не запускает nginx
 
 
 #sudo mkdir -p /etc/gunicorn.d

@@ -1,0 +1,29 @@
+[Unit]
+Description      = "Gunicorn daemon (with simple app for stepik project)"
+After            = network.target
+
+[Service]
+PIDFile          = /tmp/gunicorn.pid
+User             = www-data
+Group            = www-data
+WorkingDirectory = /home/box/web
+ExecStart        = /home/box/web/init-systemd.sh gunicorn
+
+[Install]
+WantedBy         = multi-user.target
+
+
+#Type             = forking
+#[Service]
+#PermissionsStartOnly = true
+#PIDFile = /run/gunicorn_app/gunicorn_app.pid
+#User = gunicorn_app
+#Group = gunicorn_app
+#WorkingDirectory = /opt/gunicorn_app
+#ExecStartPre = /bin/mkdir /run/gunicorn_app
+#ExecStartPre = /bin/chown -R gunicorn_app:gunicorn_app /run/gunicorn_app
+#ExecStart = /usr/bin/env gunicorn hello:app -b 0.0.0.0:8000 --pid /run/gunicorn_app/gunicorn_app.pid
+#ExecReload = /bin/kill -s HUP $MAINPID
+#ExecStop = /bin/kill -s TERM $MAINPID
+#ExecStopPost = /bin/rm -rf /run/gunicorn_app
+#PrivateTmp = true
