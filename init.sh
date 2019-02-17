@@ -9,10 +9,20 @@ sudo service nginx restart
 
 
 # --- 2. gunicorn ---
-sudo gunicorn               `#          				`\
-    --chdir /home/box/web/  `# to application folder	`\
-    --bind 0.0.0.0:8080     `# socket to bind         	`\
-    hello:app				`# module:function         	`
+
+venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"
+proj_dir="/home/box/web/ask/"
+$venv_gunicorn              `#          				`\
+	--chdir $proj_dir		`# to application folder	`\
+	--bind 0.0.0.0:8000     `# socket to bind         	`\
+	ask.wsgi:application	`# module:function         	`
+	
+
+# --- 2. gunicorn для первого задания с ним  ---
+#sudo gunicorn               `#          				`\
+#    --chdir /home/box/web/  `# to application folder	`\
+#    --bind 0.0.0.0:8080     `# socket to bind         	`\
+#    hello:app				`# module:function         	`
 
 
 

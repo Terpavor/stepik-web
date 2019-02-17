@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-
 if [ "$1" == "prepare" ]; then # создаём симлинки
 	sudo ln                              `# make links between files         `\
 		--symbolic                       `# symbolic link, not hard link     `\
@@ -12,11 +11,17 @@ if [ "$1" == "prepare" ]; then # создаём симлинки
 	
 elif [ "$1" == "gunicorn" ]; then
 	# команды для выполнения в systemctl start gunicorn.service
-    venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"
+	venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"
+	proj_dir="/home/box/web/ask/"
 	$venv_gunicorn              `#          				`\
-		--chdir /home/box/web/  `# to application folder	`\
-		--bind 0.0.0.0:8080     `# socket to bind         	`\
-		hello:app				`# module:function         	`
+		--chdir $proj_dir		`# to application folder	`\
+		--bind 0.0.0.0:8000     `# socket to bind         	`\
+		ask.wsgi:application	`# module:function         	`
+	
+	#$venv_gunicorn              `#          				`\
+	#	--chdir /home/box/web/  `# to application folder	`\
+	#	--bind 0.0.0.0:8080     `# socket to bind         	`\
+	#	hello:app				`# module:function         	`
 	
 else # тестируем приложение
 	sudo systemctl start nginx.service
