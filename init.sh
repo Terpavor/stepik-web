@@ -9,7 +9,7 @@ sudo service nginx restart
 
 
 # --- 3. mysql ------
-sudo /etc/init.d/mysql start
+#sudo /etc/init.d/mysql start
 
 # --- 2. gunicorn ---
 
