@@ -1,5 +1,19 @@
+# -*- coding: utf-8 -*-
+
 from django.db import models
 from django.contrib.auth.models import User
+
+
+# class QuestionManager - менеджер модели Question
+
+# new - метод возвращающий последние добавленные вопросы
+# popular - метод возвращающий вопросы отсортированные по рейтингу
+class QuestionManager(models.Manager):
+	def new(self):
+		return self.order_by('-added_at')
+	def popular(self):
+		return self.order_by('-rating')
+
 
 # class Question - вопрос
 
@@ -15,10 +29,13 @@ class Question(models.Model):
 	added_at = models.DateTimeField(auto_now_add=True)
 	rating = models.IntegerField(default=0)
 	
-	author = models.OneToOneField(User, 
-	                              on_delete=models.DO_NOTHING)
+	author = models.ForeignKey(User,
+							   on_delete=models.DO_NOTHING)
 	likes = models.ManyToManyField(User, 
 	                               related_name='question_liked')
+	
+	objects = QuestionManager()
+
 
 # class Answer - ответ
 
@@ -32,16 +49,18 @@ class Answer(models.Model):
 	
 	question = models.ForeignKey('Question', 
 	                             on_delete=models.DO_NOTHING)
-	author = models.OneToOneField(User,
-	                              on_delete=models.DO_NOTHING)
+	author = models.ForeignKey(User,
+							   on_delete=models.DO_NOTHING)
 
 
-# class QuestionManager - менеджер модели Question
 
-# new - метод возвращающий последние добавленные вопросы
-# popular - метод возвращающий вопросы отсортированные по рейтингу
-class QuestionManager(models.Manager):
-	def new(self):
-		return self.order_by('-added_at')
-	def popular(self):
-		return self.order_by('-rating')
+
+
+
+
+
+
+
+
+
+

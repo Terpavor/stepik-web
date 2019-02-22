@@ -1,9 +1,25 @@
-# --- 1. nginx ------
-sudo ln                              `# make links between files         `\
-    --symbolic                       `# symbolic link, not hard link     `\
-    --force                          `# delete existing destination file `\
-    /home/box/web/etc/nginx.conf     `# source file                      `\
-    /etc/nginx/sites-enabled/default `# destination file (symlink)       `
+
+
+if [ "$1" == "prepare" ]; then # создаём симлинки
+	# --- 0. virtualenv -
+	virtualenv -p python3 ~/.virtualenv/web
+	source ~/.virtualenv/web/bin/activate
+
+	pip install --upgrade pip
+	pip install django
+	pip install gunicorn
+
+	python3 /home/box/web/ask/manage.py makemigrations
+	python3 /home/box/web/ask/manage.py migrate
+
+	# --- 1. nginx ------
+	sudo ln                              `# make links between files         `\
+		--symbolic                       `# symbolic link, not hard link     `\
+		--force                          `# delete existing destination file `\
+		/home/box/web/etc/nginx.conf     `# source file                      `\
+		/etc/nginx/sites-enabled/default `# destination file (symlink)       `
+fi
+
 
 sudo service nginx restart
 
