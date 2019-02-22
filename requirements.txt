@@ -1,2 +1,3 @@
 gunicorn
-django
+Django
+mysqlclient  # https://stackoverflow.com/a/25724855

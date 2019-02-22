@@ -8,6 +8,9 @@ sudo ln                              `# make links between files         `\
 sudo service nginx restart
 
 
+# --- 3. mysql ------
+sudo /etc/init.d/mysql start
+
 # --- 2. gunicorn ---
 
 venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"

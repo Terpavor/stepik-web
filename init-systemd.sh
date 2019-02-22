@@ -18,19 +18,23 @@ elif [ "$1" == "gunicorn" ]; then
 		--bind 0.0.0.0:8000     `# socket to bind         	`\
 		ask.wsgi:application	`# module:function         	`
 	
-	#$venv_gunicorn              `#          				`\
-	#	--chdir /home/box/web/  `# to application folder	`\
-	#	--bind 0.0.0.0:8080     `# socket to bind         	`\
-	#	hello:app				`# module:function         	`
+elif [ "$1" == "gunicorn-hello-world" ]; then
+	# аналогично для предыдущего задания
+	$venv_gunicorn              `#          				`\
+		--chdir /home/box/web/  `# to application folder	`\
+		--bind 0.0.0.0:8080     `# socket to bind         	`\
+		hello:app				`# module:function         	`
 	
 else # тестируем приложение
 	sudo systemctl start nginx.service
 	sudo systemctl start gunicorn.service
+	sudo systemctl start mysqld.service
 
 	read -p "Press enter to stop services..."
 
 	sudo systemctl stop nginx.service
 	sudo systemctl stop gunicorn.service
+	sudo systemctl stop mysqld.service
 fi
 
 

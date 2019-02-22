@@ -29,14 +29,22 @@ ALLOWED_HOSTS = ['*']
 
 
 # Application definition
-
+	
+	
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
+#	'ask',
+#	'login',
+#	'signup',
+#	'question',
+	'qa',
+#	'popular',
+#	'new',
+#    'django.contrib.admin',
+#    'django.contrib.auth',
+#    'django.contrib.contenttypes',
+#    'django.contrib.sessions',
+#    'django.contrib.messages',
+#    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -78,8 +86,15 @@ DATABASES = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    'mysql': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'web',
+        'USER': 'root',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
