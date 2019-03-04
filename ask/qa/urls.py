@@ -4,12 +4,12 @@ import qa.views as views
 
 # path(route, view, kwargs=None, name=None)
 urlpatterns = [
-	path('', 					views.test),	
+	path('', 					views.new_questions),
 	path('login/', 				views.test),
 	path('signup/', 			views.test),
-	path('question/<int:num>/', views.test),
+	path('popular/', 			views.popular_questions),
+	path('question/<int:num>/', views.question_page),
 	path('ask/', 				views.test),
-	path('popular/', 			views.test),
 	path('new/', 				views.test)
 ]
 '''

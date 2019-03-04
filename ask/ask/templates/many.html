@@ -1,0 +1,36 @@
+{% load staticfiles  %}
+<!DOCTYPE html>
+<!-- ask/qa/templates/1.html -->
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <!--
+	<link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+	-->
+  </head>
+  <body>
+    <!-- page content -->
+	<p>paginator.count: {{ paginator.count }}</p>
+	<p>paginator.num_pages: {{ paginator.num_pages }}</p>
+	<p>paginator.page_range: {{ paginator.page_range }}</p>
+
+    <div class="pagination">
+        <b>
+        {% for p_num in paginator.page_range %}
+            {% if p_num != page.number %}<a href="{{ paginator.url_template|join:p_num }}">{% endif %}
+                {{ p_num }}
+            {% if p_num != page.number %}</a>{% endif %}
+            {% if not forloop.last %}, {% endif %}
+        {% endfor %}
+        </b>
+    </div>
+
+    {% for question in questions %}
+        <h1>question.title: <a href=/question/{{question.pk}}/>{{ question.title }}</a></h1>
+          <!-- <h1>question.title: <a href=/question/{{question.pk}}/>{ -->
+    {% endfor %}
+
+  </body>
+</html>

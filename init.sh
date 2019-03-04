@@ -18,23 +18,24 @@ if [ "$1" == "prepare" ]; then # создаём симлинки
 		--force                          `# delete existing destination file `\
 		/home/box/web/etc/nginx.conf     `# source file                      `\
 		/etc/nginx/sites-enabled/default `# destination file (symlink)       `
+else
+	sudo service nginx restart
+
+
+	# --- 3. mysql ------
+	#sudo /etc/init.d/mysql start
+
+	# --- 2. gunicorn ---
+
+	venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"
+	proj_dir="/home/box/web/ask/"
+	$venv_gunicorn              `#          				`\
+		--chdir $proj_dir		`# to application folder	`\
+		--bind 0.0.0.0:8000     `# socket to bind         	`\
+		ask.wsgi:application	`# module:function         	`
 fi
 
 
-sudo service nginx restart
-
-
-# --- 3. mysql ------
-#sudo /etc/init.d/mysql start
-
-# --- 2. gunicorn ---
-
-venv_gunicorn="/home/box/.virtualenv/web/bin/gunicorn"
-proj_dir="/home/box/web/ask/"
-$venv_gunicorn              `#          				`\
-	--chdir $proj_dir		`# to application folder	`\
-	--bind 0.0.0.0:8000     `# socket to bind         	`\
-	ask.wsgi:application	`# module:function         	`
 	
 
 # --- 2. gunicorn для первого задания с ним  ---
