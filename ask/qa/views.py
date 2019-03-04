@@ -1,6 +1,6 @@
 import django.http  # HttpResponse, Http404, request
 from django.core.paginator import * # Paginator, EmptyPage exception,
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.utils import html               # html.escape()
 from django.core.exceptions import ObjectDoesNotExist
 
@@ -21,15 +21,13 @@ def test2(request):
 
 
 def question_page(request, num: int):
-    try:
-        post = Question.objects.get(pk=num)
-    except ObjectDoesNotExist:
-        raise django.http.Http404
+    question = get_object_or_404(Question, pk=num)
+    answers = question.answer_set.all()
     
     return render(request, '1.html', {
-        'post': post
+        'question': question,
+        'answers': answers
     })
-    pass
 
 def popular_questions(request):
     
@@ -57,11 +55,11 @@ def new_questions(request):
 
 def paginate(request, qs):
     try:
-        limit = int(request.GET.get('limit', 4))
+        limit = int(request.GET.get('limit', 10))
     except ValueError:
-        limit = 4
+        limit = 10
     if not 0 < limit <= 100:
-        limit = 4
+        limit = 10
     
     try:
         page_num = request.GET.get('page', 1)
@@ -78,7 +76,7 @@ def paginate(request, qs):
     query_dict = request.GET.copy()
     if 'limit' in query_dict:
         query_dict['limit'] = limit
-    query_dict.pop('page')
+    query_dict.pop('page', None)
     paginator.url_template = ['?page=', '']
     if query_dict:
         paginator.url_template[-1] = '&' + query_dict.urlencode()

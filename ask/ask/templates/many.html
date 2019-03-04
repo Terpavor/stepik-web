@@ -17,7 +17,7 @@
 	<p>paginator.page_range: {{ paginator.page_range }}</p>
 
     <div class="pagination">
-        <b>
+        <b>pages:
         {% for p_num in paginator.page_range %}
             {% if p_num != page.number %}<a href="{{ paginator.url_template|join:p_num }}">{% endif %}
                 {{ p_num }}
